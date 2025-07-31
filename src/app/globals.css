@@ -35,6 +35,10 @@
     position: relative;
   }
 
+  .underline-current {
+    position: relative;
+  }
+
   .underline-hover::after {
     content: "";
     position: absolute;
@@ -46,7 +50,21 @@
     transition: width 0.3s ease-in-out;
   }
 
+  .underline-current::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+  }
+
   .underline-hover:hover::after {
+    width: 100%;
+  }
+
+  .underline-current:hover::after {
     width: 100%;
   }
 }

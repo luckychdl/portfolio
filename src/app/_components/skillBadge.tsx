@@ -3,9 +3,15 @@ interface SkillBadgeProps {
   name: string;
   level: "Beginner" | "Intermediate" | "Advanced" | "Basic";
   project?: string;
+  icon?: React.ReactElement;
 }
 
-export default function SkillBadge({ name, level, project }: SkillBadgeProps) {
+export default function SkillBadge({
+  name,
+  level,
+  project,
+  icon,
+}: SkillBadgeProps) {
   const levelColor = {
     Beginner: "bg-gray-500",
     Intermediate: "bg-yellow-500",
@@ -15,7 +21,10 @@ export default function SkillBadge({ name, level, project }: SkillBadgeProps) {
 
   return (
     <div className="relative group p-3 border border-beige rounded-xl bg-zinc-900 hover:shadow-md transition duration-300">
-      <div className="text-beige font-semibold">{name}</div>
+      <div className="text-beige font-semibold flex flex-row items-center gap-1">
+        {icon}
+        <p>{name}</p>
+      </div>
       <div
         className={`mt-2 text-xs px-2 py-1 inline-block rounded ${levelColor[level]}`}
       >
