@@ -10,6 +10,7 @@ import { FaAws } from "react-icons/fa";
 import { SiOpenai } from "react-icons/si";
 import TransitionWrapper from "../_components/transitionWrapper";
 import { GiSkills } from "react-icons/gi";
+import { IoLogoCss3 } from "react-icons/io";
 
 export default function Skills() {
   return (
@@ -94,6 +95,32 @@ export default function Skills() {
                 level="Beginner"
                 project="indition / indition-warehouse 백엔드 구현"
                 icon={<FaNodeJs />}
+              />
+              <SkillBadge
+                name="CSS/SCSS
+"
+                level="Advanced"
+                project="indition / indition-warehouse 백엔드 구현"
+                icon={<IoLogoCss3 />}
+              />
+              <SkillBadge
+                name="Emotion"
+                level="Intermediate"
+                project="indition / indition-warehouse 백엔드 구현"
+                icon={<IoLogoCss3 />}
+              />
+              <SkillBadge
+                name="Styled Components
+"
+                level="Intermediate"
+                project="indition / indition-warehouse 백엔드 구현"
+                icon={<IoLogoCss3 />}
+              />
+              <SkillBadge
+                name="Tailwind CSS"
+                level="Beginner"
+                project="indition / indition-warehouse 백엔드 구현"
+                icon={<IoLogoCss3 />}
               />
             </div>
           </section>

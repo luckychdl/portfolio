@@ -30,6 +30,21 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  /* 스크롤 트랙을 투명하게 설정 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  /* 밝은 스크롤 색상 (다크모드용) */
+  border-radius: 4px;
+}
+
 @layer utilities {
   .underline-hover {
     position: relative;
@@ -67,4 +82,5 @@
   .underline-current:hover::after {
     width: 100%;
   }
+
 }

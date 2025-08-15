@@ -18,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning className="dark">
       <ThemeProvider>
-        <body className="bg-white dark:bg-black transition-colors duration-300 p-8 w-screen h-screen flex flex-col">
+        <body className="bg-white dark:bg-black transition-colors duration-300  w-screen h-screen flex flex-col">
           <Header />
+
           {children}
+
           <Nav />
         </body>
       </ThemeProvider>

@@ -12,7 +12,7 @@ export default function TransitionWrapper({
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        className="w-full h-[calc(100%-60px-40px)]"
+        className="w-full h-[calc(100%-72px-60px)] px-8"
         key={pathname}
         initial={{ opacity: 0.5, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -6,7 +6,7 @@ import { FaCode } from "react-icons/fa";
 
 export default function Header() {
   return (
-    <header className="flex w-full h-[40px] justify-between items-center">
+    <header className="flex w-full h-[60px] min-h-[60px] justify-between items-center px-8">
       <FaCode className="w-12 h-12 text-black dark:text-amber-100" />
       <div className="flex items-center gap-x-4">
         <Link href={`/`}>
