@@ -9,7 +9,6 @@ import "react-vertical-timeline-component/style.min.css";
 
 import { FaCode, FaRocket, FaGraduationCap } from "react-icons/fa";
 import TransitionWrapper from "../_components/transitionWrapper";
-import { FaUserCircle } from "react-icons/fa";
 
 export default function About() {
   return (

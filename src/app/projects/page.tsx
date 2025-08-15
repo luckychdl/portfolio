@@ -2,19 +2,12 @@
 import TransitionWrapper from "../_components/transitionWrapper";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { useEffect, useRef, useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import Locus from "../_components/locus";
 import Trenshow from "../_components/trenshow";
 import House from "../_components/261house";
 
 export default function Projects() {
-  const searchParams = useSearchParams();
-  const type = searchParams.get("type");
-  const router = useRouter();
-
   const locusRef = useRef<HTMLDivElement>(null);
   const trenshowRef = useRef<HTMLDivElement>(null);
   const houseRef = useRef<HTMLDivElement>(null);
