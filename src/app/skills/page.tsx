@@ -100,26 +100,22 @@ export default function Skills() {
                 name="CSS/SCSS
 "
                 level="Advanced"
-                project="indition / indition-warehouse 백엔드 구현"
                 icon={<IoLogoCss3 />}
               />
               <SkillBadge
                 name="Emotion"
                 level="Intermediate"
-                project="indition / indition-warehouse 백엔드 구현"
                 icon={<IoLogoCss3 />}
               />
               <SkillBadge
                 name="Styled Components
 "
                 level="Intermediate"
-                project="indition / indition-warehouse 백엔드 구현"
                 icon={<IoLogoCss3 />}
               />
               <SkillBadge
                 name="Tailwind CSS"
                 level="Beginner"
-                project="indition / indition-warehouse 백엔드 구현"
                 icon={<IoLogoCss3 />}
               />
             </div>
