@@ -132,7 +132,11 @@ const Locus = React.forwardRef<HTMLDivElement>((props, ref) => {
           </Card>
           <Card>
             <CardTitle text="해결한 문제 / 주요 구현 포인트" />
-
+            <p className={textBaseBold}>컴포넌트 QA 페이지 도입 및 제작</p>
+            <p className={textSmallMargin}>
+              → 컴포넌트 QA 페이지 도입으로 QA 시간 단축으로 프로젝트 배포 기간
+              단축
+            </p>
             <p className={textBaseBold}>
               WMS 시스템의 핵심 기능 분석 후 맞춤형 UI로 재구현
             </p>
