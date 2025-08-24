@@ -27,6 +27,23 @@
     margin: 0;
     box-sizing: border-box;
     outline: none;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: transform 300ms ease;
+    }
+  }
+
+  button.no-style {
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+
+    &:hover {
+      transform: scale(1) !important;
+      transition: transform 300ms ease;
+    }
   }
 }
 

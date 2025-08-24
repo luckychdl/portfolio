@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 export default function Nav() {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-row justify-center gap-x-40 items-center w-full h-[72px]">
+    <nav className="flex flex-row justify-center md:gap-x-40 sm:gap-x-20 gap-x-4 items-center w-full h-[72px] ">
       <Link href={`/about`}>
         <button
           className={`text-black dark:text-amber-100 ${
             pathname == "/about" ? "underline-current" : ""
-          } underline-hover text-lg font-light sm:text-lg  lg:text-3xl`}
+          } underline-hover text-lg font-light sm:text-sm  lg:text-3xl `}
         >
           ABOUT
         </button>

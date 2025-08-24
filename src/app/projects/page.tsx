@@ -22,7 +22,7 @@ export default function Projects() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     [locusRef, trenshowRef, houseRef].forEach((ref) => {
@@ -65,27 +65,27 @@ export default function Projects() {
   };
   return (
     <TransitionWrapper>
-      <div className="flex-1 flex items-start justify-start w-full h-full py-2">
-        <div className="flex flex-col py-8 gap-y-4 relative w-[300px] h-full">
+      <div className="flex lg:flex-row flex-col items-start justify-start w-full h-full py-2 ">
+        <div className="flex flex-col py-8 gap-y-4 relative lg:w-[300px] lg:h-full w-full">
           {/* Title */}
-          <div className="flex flex-row items-center justify-start gap-x-2">
+          <div className="flex-row items-center justify-start gap-x-2 hidden lg:flex">
             <HiOutlineClipboardList className="w-12 h-12 text-black dark:text-amber-100" />
-            <p className="text-black dark:text-amber-100 text-4xl">PROJECTS</p>
+            <p className="text-black dark:text-amber-100 text-4xl ">PROJECTS</p>
           </div>
 
-          <div className="flex flex-col items-start justify-start absolute top-1/2 left-0 -translate-y-1/2 border-l-4 border-gray-200 pl-4">
+          <div className="flex lg:flex-col gap-x-8 flex-row w-full items-center justify-center lg:items-start lg:justify-start lg:absolute lg:top-1/2 lg:left-0 lg:-translate-y-1/2 border-l-4 lg:border-gray-200 lg:pl-4">
             {["locuskorea", "trenshow", "261house"].map((key) => {
               const isActive = activeType == key;
               return (
                 <button
-                  className="h-12 flex items-center relative "
+                  className="h-12 flex  items-center relative no-style"
                   key={key}
                   onClick={() => scrollToSection(key)}
                 >
                   {activeType === key && (
                     <motion.div
                       layoutId="indicator"
-                      className="absolute -left-5 w-1 h-12 bg-black dark:bg-amber-100"
+                      className=" hidden lg:block absolute -left-5 w-1 h-12 bg-black dark:bg-amber-100 "
                     />
                   )}
                   <motion.p
@@ -103,7 +103,7 @@ export default function Projects() {
                       activeType == key
                         ? "dark:text-amber-100"
                         : "dark:text-gray-500"
-                    } uppercase`}
+                    } uppercase hover:scale-110 transition-transform`}
                   >
                     {key}
                   </motion.p>
@@ -112,7 +112,7 @@ export default function Projects() {
             })}
           </div>
         </div>
-        <div className="w-full h-full flex flex-col gap-y-10 flex-1 overflow-y-auto text-black dark:text-amber-100">
+        <div className="w-full h-full flex flex-col gap-y-10 flex-1 overflow-y-auto text-black dark:text-amber-100 ">
           <Locus ref={locusRef} />
           <Trenshow ref={trenshowRef} />
           <House ref={houseRef} />

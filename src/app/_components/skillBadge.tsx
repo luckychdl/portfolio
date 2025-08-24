@@ -20,19 +20,19 @@ export default function SkillBadge({
   };
 
   return (
-    <div className="relative group p-3 border border-beige rounded-xl bg-zinc-900 hover:shadow-md transition duration-300">
-      <div className="text-beige font-semibold flex flex-row items-center gap-1">
+    <div className="relative group p-3 border border-beige rounded-xl bg-zinc-900 hover:shadow-md transition duration-300 ">
+      <div className="text-beige font-semibold flex flex-row items-center gap-1 z-10">
         {icon}
         <p>{name}</p>
       </div>
       <div
-        className={`mt-2 text-xs px-2 py-1 inline-block rounded ${levelColor[level]}`}
+        className={`mt-2 text-xs px-2 py-1 inline-block rounded z-10 ${levelColor[level]}`}
       >
         {level}
       </div>
 
       {project && (
-        <div className="absolute z-10 hidden group-hover:block text-sm bg-black text-white border border-beige rounded p-2 mt-2 w-60">
+        <div className="absolute top-full left-0 mt-2 hidden group-hover:block z-50 text-sm bg-black text-white border border-beige rounded p-2 w-60">
           관련 프로젝트: <br />
           <span className="font-light">{project}</span>
         </div>

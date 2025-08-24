@@ -15,7 +15,7 @@ import { IoLogoCss3 } from "react-icons/io";
 export default function Skills() {
   return (
     <TransitionWrapper>
-      <div className="flex-1 flex flex-col items-center w-full h-full justify-center pt-8">
+      <div className="flex-1 flex flex-col items-center w-full h-full pt-8 overflow-y-auto relative">
         <div className="flex flex-row items-center justify-start gap-x-2">
           <GiSkills className="w-12 h-10 text-black dark:text-amber-100" />
           <h2 className="text-black dark:text-amber-100 text-4xl">SKILLS</h2>

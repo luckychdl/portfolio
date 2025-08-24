@@ -10,11 +10,11 @@ import CardTitle from "./CardTitle";
 const Locus = React.forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div
-      className="flex flex-row items-start justify-start gap-x-4 px-8  "
+      className="flex lg:flex-row flex-col items-start justify-start gap-x-4 lg:px-8 px-2 "
       ref={ref}
       id="locuskorea"
     >
-      <div className="flex flex-col min-w-[20%] max-w-[20%] gap-y-4">
+      <div className="flex flex-col lg:min-w-[20%] lg:max-w-[20%] gap-y-4 w-full mb-4">
         <div className="border-1 p-4 rounded-2xl bg-black text-white flex w-full flex-col gap-y-2">
           <p>LOCUSKOREA</p>
           <p>2024-11 ~ 2025-06</p>
