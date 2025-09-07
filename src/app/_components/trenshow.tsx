@@ -140,6 +140,9 @@ const Trenshow = React.forwardRef<HTMLDivElement>((props, ref) => {
             <p className={textBaseBold}>
               재고처리 속도 30~50% 향상, 실시간 상태 파악 정확도 상승
             </p>
+            <p className={textBaseBold}>
+              앱 바코드 인식 기능 → 업무 간소화 및 작업 인력 30% 감소
+            </p>
             <p className={textBaseBold}>현장 사용자 피드백 기반 UX 개선</p>
             <p className={textSmall}>→ 반복 작업 최소화</p>
           </Card>

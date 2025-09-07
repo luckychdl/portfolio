@@ -73,7 +73,7 @@ export default function Projects() {
             <p className="text-black dark:text-amber-100 text-4xl ">PROJECTS</p>
           </div>
 
-          <div className="flex lg:flex-col gap-x-8 flex-row w-full items-center justify-center lg:items-start lg:justify-start lg:absolute lg:top-1/2 lg:left-0 lg:-translate-y-1/2 border-l-4 lg:border-gray-200 lg:pl-4">
+          <div className="flex lg:flex-col gap-x-8 flex-row w-full items-center justify-center lg:items-start lg:justify-start lg:absolute lg:top-1/2 lg:left-0 lg:-translate-y-1/2 lg:border-b-0 border-b-4 lg:border-l-4 lg:border-gray-200 lg:pl-4">
             {["locuskorea", "trenshow", "261house"].map((key) => {
               const isActive = activeType == key;
               return (

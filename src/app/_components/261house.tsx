@@ -115,13 +115,15 @@ const House = React.forwardRef<HTMLDivElement>((props, ref) => {
           <CardTitle text="프로젝트 성과" />
           <p className={textSmallMargin}>재고 출고율 93% 달성</p>
           <p className={textSmallMargin}>
-            협찬 → 리세일 전환 구조로 구독→구매 전환율 35% 이상 확보
+            협찬 → 리세일 전환 구조로 구독 → 구매 전환율 35% 이상 확보에 기여
+          </p>
+          <p className={textSmallMargin}>평균 이미지 로딩 속도 45% 단축</p>
+          <p className={textSmallMargin}>
+            고객사 전용 어드민 페이지 개선 → 공급사 확장 기여 ( 공급사 200% 증가
+            )
           </p>
           <p className={textSmallMargin}>
-            고객사 전용 어드민 페이지 제공을 통한 B2B 공급망 확장
-          </p>
-          <p className={textSmall}>
-            신규 유저 유입 대비 첫 결제 전환율 약 28% 달성
+            장바구니 이탈율 약 15% 감소 ( 간편결제 도입으로 결제 단계 단축 )
           </p>
         </Card>
 
