@@ -13,7 +13,7 @@ import TransitionWrapper from "../_components/transitionWrapper";
 export default function About() {
   return (
     <TransitionWrapper>
-      <div className="text-white  flex flex-col flex-1 items-start justify-start box-border overflow-auto py-8">
+      <div className="text-white  flex flex-col flex-1 h-full items-start justify-start box-border overflow-auto py-8">
         <VerticalTimeline lineColor="#E5D4B3">
           <VerticalTimelineElement
             className="vertical-timeline-element--education"
