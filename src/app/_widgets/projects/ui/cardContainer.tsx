@@ -1,7 +1,7 @@
 "use client";
 
-import Card from "@/app/_components/card";
-import CardTitle from "@/app/_components/cardTitle";
+import CardBox from "@/app/_components/cardBox";
+import CardTitleBox from "@/app/_components/cardTitleBox";
 import { Project } from "@/app/_types/project";
 import {
   textBaseBold,
@@ -19,15 +19,15 @@ export default function CardContainer({ project }: Project) {
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         {/* 프로젝트 제목 및 설명 */}
-        <Card>
+        <CardBox>
           <span className="text-xl font-bold">{project.title}</span>
           <span className="text-xl font-bold">{project.description}</span>
-        </Card>
+        </CardBox>
 
         {/* 프로젝트 하이라이트 */}
         {project.highlights.length > 0 && (
-          <Card>
-            <CardTitle text="주요 특징" />
+          <CardBox>
+            <CardTitleBox text="주요 특징" />
             <div className="flex flex-wrap gap-2">
               {project.highlights.map((highlight, index) => (
                 <span
@@ -38,44 +38,44 @@ export default function CardContainer({ project }: Project) {
                 </span>
               ))}
             </div>
-          </Card>
+          </CardBox>
         )}
 
         {/* 프로젝트 배경 */}
-        <Card>
-          <CardTitle text="프로젝트 배경" />
+        <CardBox>
+          <CardTitleBox text="프로젝트 배경" />
           <p className={textSmall}>{project.background}</p>
-        </Card>
+        </CardBox>
 
         {/* 맡은 역할 */}
-        <Card>
-          <CardTitle text="맡은 역할" />
+        <CardBox>
+          <CardTitleBox text="맡은 역할" />
           {project.responsibilities.map((responsibility, index) => (
             <p key={index} className={textSmallMargin}>
               • {responsibility}
             </p>
           ))}
-        </Card>
+        </CardBox>
         {project.projects &&
           project.projects.length > 0 &&
           project.projects.map((el) => (
-            <Card key={el.id}>
-              <CardTitle text={el.title} />
+            <CardBox key={el.id}>
+              <CardTitleBox text={el.title} />
               {el.contents.map((contents, index) => (
                 <p key={index} className={textSmallMargin}>
                   • {contents}
                 </p>
               ))}
-            </Card>
+            </CardBox>
           ))}
 
         {/* 기술적 선택과 전환 이유 */}
         {project.technicalChoices && project.technicalChoices.length > 0 && (
-          <Card>
-            <CardTitle text="기술적 선택과 전환 이유" />
+          <CardBox>
+            <CardTitleBox text="기술적 선택과 전환 이유" />
             {project.technicalChoices.map((choice, index) => (
               <div key={index} className="flex flex-col gap-y-2 mb-4">
-                <CardTitle text={choice.title} />
+                <CardTitleBox text={choice.title} />
                 <p className={textSmallMargin}>{choice.description}</p>
                 {choice.reasons.map((reason, reasonIndex) => (
                   <p key={reasonIndex} className={textSmallMargin}>
@@ -84,28 +84,28 @@ export default function CardContainer({ project }: Project) {
                 ))}
               </div>
             ))}
-          </Card>
+          </CardBox>
         )}
 
         {/* 주요 성과 */}
-        <Card>
-          <CardTitle text="주요 성과 및 기여" />
+        <CardBox>
+          <CardTitleBox text="주요 성과 및 기여" />
           {project.achievements.map((achievement, index) => (
             <p key={index} className={textBaseBold}>
               → {achievement}
             </p>
           ))}
-        </Card>
+        </CardBox>
 
         {/* 배운 점 */}
-        <Card>
-          <CardTitle text="배운 점" />
+        <CardBox>
+          <CardTitleBox text="배운 점" />
           {project.learnings.map((learning, index) => (
             <p key={index} className={textSmallMargin}>
               • {learning}
             </p>
           ))}
-        </Card>
+        </CardBox>
       </motion.div>
     </div>
   );
