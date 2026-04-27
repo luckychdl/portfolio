@@ -24,7 +24,6 @@ export default function ProjectCard() {
       behavior: "auto",
     });
   }, [type]);
-  console.log(project);
   return (
     <>
       {project && (

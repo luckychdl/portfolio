@@ -1,5 +1,4 @@
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
-import { FaCode, FaRocket, FaGraduationCap } from "react-icons/fa";
 interface VerticalTimelineProps {
   icon: React.ReactNode;
   position?: string;

@@ -3,7 +3,6 @@ import "./globals.css";
 import Nav from "./_widgets/layout/ui/nav";
 import ThemeProvider from "./_components/themeProvider";
 import Header from "./_widgets/layout/ui/header";
-import TransitionWrapper from "./_components/transitionWrapper";
 
 export const metadata: Metadata = {
   title: "portfolio",
