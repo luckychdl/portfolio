@@ -8,6 +8,7 @@ import ProjectRole from "./role";
 import ProjectStack from "./stack";
 import { useSearchParams } from "next/navigation";
 import CardContainer from "./cardContainer";
+import ProjectImages from "./projectImages";
 
 export default function ProjectCard() {
   const searchParams = useSearchParams();
@@ -42,6 +43,8 @@ export default function ProjectCard() {
               <ProjectRole project={project} />
               {/* 기술 스택 */}
               <ProjectStack project={project} />
+
+              <ProjectImages />
             </div>
 
             {/* 메인 콘텐츠 */}

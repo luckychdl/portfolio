@@ -1,4 +1,4 @@
-import TransitionWrapper from "../_components/transitionWrapper";
+import TransitionWrapper from "../../../transitionWrapper";
 import BadgeContainer from "../_widgets/skills/ui/badgeContainer";
 
 import SkillsHeader from "../_widgets/skills/ui/header";
