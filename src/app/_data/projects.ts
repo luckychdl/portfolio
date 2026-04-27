@@ -2,7 +2,7 @@ import { ProjectData } from "../_types/project";
 
 export const projectsData: ProjectData[] = [
   {
-    id: "locuskorea",
+    id: "LOCUSKOREA",
     title: "AI 기반 물류 통합 SaaS 솔루션",
     company: "LOCUSKOREA",
     period: "2024-11 ~ 2025-06",
@@ -19,7 +19,6 @@ export const projectsData: ProjectData[] = [
     background:
       "기존 물류 산업에서는 재고 누락·초과·미정리 등의 문제가 당연시되어 왔으며, WMS 시스템조차 단순 기록 수준에 머물러 예측이나 실시간 대응은 불가능했습니다. 이에, 물류 데이터를 기반으로 한 AI 예측 모델과 자동 재고 파악 기능을 포함한 통합 SaaS 솔루션을 기획하게 되었습니다.",
     responsibilities: [
-      "플랫폼 전체 아키텍처 설계 및 UI/UX 기획 주도",
       "WebSocket/LLM 기반 실시간 시스템 구현",
       "물류센터 현장 인터뷰를 통한 사용자 중심 설계",
     ],
@@ -57,7 +56,7 @@ export const projectsData: ProjectData[] = [
       "Redux/Redux-Saga → React Query + Zustand로 기술 스택 전환을 통한 개발 효율성 40% 향상",
       "Next.js 12 → Next.js 15 업그레이드로 SSR 최적화 및 App Router 도입",
       "AWS Amplify로 CI/CD 자동화 구축",
-      "QA 시간 40% 단축을 위한 컴포넌트 QA 페이지 자체 제작",
+      "컴포넌트 QA 페이지 자체 제작으로 QA 시간 40% 단축",
       "OpenAI API 활용 실시간 예측 및 응답 시스템 구현",
       "채팅, 메모(크기 조절·이동·스티커) 구현으로 현장 작업자 실시간 소통 병목 해소",
     ],
@@ -74,7 +73,7 @@ export const projectsData: ProjectData[] = [
     ],
   },
   {
-    id: "trenshow",
+    id: "TRENSHOW",
     title: "동대문 물류 통합 플랫폼",
     company: "TRENSHOW",
     period: "2024-06 ~ 2024-10",
@@ -83,6 +82,7 @@ export const projectsData: ProjectData[] = [
     techStack: [
       "React",
       "Next.js",
+      "React-Native",
       "JavaScript",
       "TypeScript",
       "Redux",
@@ -156,7 +156,7 @@ export const projectsData: ProjectData[] = [
     ],
   },
   {
-    id: "261house",
+    id: "261HOUSE",
     title: "의류 순환 플랫폼 faav",
     company: "261HOUSE",
     period: "2021-12 ~ 2024-05",
@@ -166,6 +166,7 @@ export const projectsData: ProjectData[] = [
     techStack: [
       "React",
       "Next.js",
+      "React-Native",
       "JavaScript",
       "TypeScript",
       "Redux",
@@ -174,7 +175,6 @@ export const projectsData: ProjectData[] = [
     background:
       "시즌성 재고 순환을 위한 실물 구독 시스템이 필요했고, 인플루언서 협찬부터 세컨핸즈 판매까지의 전환 흐름을 설계해야 했습니다.",
     responsibilities: [
-      "플랫폼 전체 아키텍처 설계 및 UI/UX 기획 주도",
       "faav, faav app, faav connect, faav studio 전체 개발",
       "AWS Lambda + S3 + CloudFront 기반 이미지 최적화 시스템 구현",
       "QR/NFC 결제 시스템 구축",

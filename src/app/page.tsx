@@ -1,4 +1,4 @@
-import MultiTypingText from "./_components/typingText";
+import MultiTypingText from "./_widgets/layout/ui/typingText";
 
 export default function Home() {
   return (

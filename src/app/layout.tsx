@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Nav from "./_components/nav";
-import Header from "./_components/header";
+import Nav from "./_widgets/layout/ui/nav";
 import ThemeProvider from "./_components/themeProvider";
+import Header from "./_widgets/layout/ui/header";
+import TransitionWrapper from "./_components/transitionWrapper";
 
 export const metadata: Metadata = {
   title: "portfolio",
@@ -15,13 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning className="dark">
+    <html
+      lang="ko"
+      suppressHydrationWarning
+      className="dark w-[100dvw] h-[100dvh]"
+    >
       <ThemeProvider>
-        <body className="bg-white dark:bg-black transition-colors duration-300  w-screen h-screen flex flex-col">
+        <body className="bg-white dark:bg-black transition-colors duration-300  w-[100dvw] h-[100dvh] flex flex-col">
           <Header />
-
-          {children}
-
+          {/* <TransitionWrapper> */}
+          <div className="w-[100dvw] h-[calc(100dvh-60px-68px)] lg:h-[calc(100dvh-60px-76px)]">
+            {children}
+          </div>
+          {/* </TransitionWrapper> */}
           <Nav />
         </body>
       </ThemeProvider>

@@ -18,7 +18,7 @@ export default function ThemeProvider({
       root.classList.toggle("dark", savedTheme === "dark");
     } else {
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
       setTheme(prefersDark ? "dark" : "light");
       root.classList.toggle("dark", prefersDark);
@@ -34,7 +34,6 @@ export default function ThemeProvider({
     root.classList.remove("light", "dark");
     root.classList.add(newTheme);
   };
-  console.log(theme, "ddfdff");
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

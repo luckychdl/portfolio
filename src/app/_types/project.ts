@@ -39,3 +39,7 @@ export interface ProjectData {
   highlights: string[];
   projects?: ProjectProject[];
 }
+
+export interface Project {
+  project: ProjectData;
+}
