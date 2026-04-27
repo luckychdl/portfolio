@@ -1,4 +1,5 @@
 "use client";
+
 import Card from "@/app/_components/card";
 import CardTitle from "@/app/_components/cardTitle";
 import { Project } from "@/app/_types/project";
