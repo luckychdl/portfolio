@@ -28,8 +28,8 @@ export function RenderMedia({
   if (variant === "modal") {
     return (
       <div>
-        {/* <div className="absolute inset-0 animate-pulse bg-gray-300" /> */}
         {loading && <Spinner />}
+        {/* <div className="absolute inset-0 animate-pulse bg-gray-300" /> */}
         <Image
           src={item.src}
           alt=""
@@ -43,5 +43,10 @@ export function RenderMedia({
       </div>
     );
   }
-  return <Image src={item.src} alt="" fill className="object-cover" />;
+  return (
+    <>
+      {loading && <Spinner />}
+      <Image src={item.src} alt="" fill className="object-cover" />;
+    </>
+  );
 }

@@ -24,7 +24,7 @@ export default function RootLayout({
         <body className="bg-white dark:bg-black transition-colors duration-300  w-[100dvw] h-[100dvh] flex flex-col">
           <Header />
           {/* <TransitionWrapper> */}
-          <div className="w-[100dvw] h-[calc(100dvh-60px-68px)] lg:h-[calc(100dvh-60px-76px)]">
+          <div className="w-[100dvw] h-[calc(100dvh-60px-68px)] lg:h-[calc(100dvh-60px-77px)]">
             {children}
           </div>
           {/* </TransitionWrapper> */}
