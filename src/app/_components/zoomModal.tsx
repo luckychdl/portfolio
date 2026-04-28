@@ -1,7 +1,7 @@
 "use client";
 
 import { RenderMedia } from "./renderMedia";
-
+import { motion } from "framer-motion";
 export default function ZoomModal({
   item,
   isMobile,
@@ -28,10 +28,12 @@ export default function ZoomModal({
   // };
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-50 bg-black/80 overflow-auto p-y-4"
       onClick={onClose}
-      // onWheel={handleWheel}
+      initial={{ opacity: 0, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
     >
       <button
         type="button"
@@ -41,7 +43,12 @@ export default function ZoomModal({
         ×
       </button>
 
-      <div className="min-h-full flex items-center justify-center p-6">
+      <motion.div
+        className="min-h-full flex items-center justify-center p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
         <div
           onClick={(e) => e.stopPropagation()}
           className="flex justify-center"
@@ -52,7 +59,7 @@ export default function ZoomModal({
         >
           <RenderMedia item={item} isMobile={isMobile} variant="modal" />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

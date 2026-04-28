@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-
+import { motion } from "framer-motion";
 import { ProjectData } from "../../../_types/project";
 
 import { projectsData } from "../../../_data/projects";
@@ -28,9 +28,12 @@ export default function ProjectCard() {
   return (
     <>
       {project && (
-        <div
+        <motion.div
           className="w-full lg:h-full h-[100dvh] flex flex-col gap-y-10 px-2 flex-1 overflow-y-auto text-black dark:text-amber-100 scrollbar-hide"
           ref={scrollRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div
             key={project.id}
@@ -50,7 +53,7 @@ export default function ProjectCard() {
             {/* 메인 콘텐츠 */}
             <CardContainer project={project} />
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );

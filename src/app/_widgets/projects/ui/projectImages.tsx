@@ -6,7 +6,7 @@ import { projectImages } from "@/app/_data/projectImages";
 import useIsMobile from "@/app/_hooks/useMobile";
 import { RenderMedia } from "@/app/_components/renderMedia";
 import ZoomModal from "@/app/_components/zoomModal";
-
+import { motion } from "framer-motion";
 export default function ProjectImages() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type") as keyof typeof projectImages;
@@ -40,7 +40,12 @@ export default function ProjectImages() {
         )}
 
         {isOpen && (
-          <div className="grid gap-4">
+          <motion.div
+            className="grid gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {media.map((item, index) => (
               <button
                 key={index}
@@ -51,7 +56,7 @@ export default function ProjectImages() {
                 <RenderMedia item={item} isMobile={isMobile} />
               </button>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 
