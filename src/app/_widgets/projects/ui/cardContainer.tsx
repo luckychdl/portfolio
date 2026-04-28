@@ -42,10 +42,12 @@ export default function CardContainer({ project }: Project) {
         )}
 
         {/* 프로젝트 배경 */}
-        <CardBox>
-          <CardTitleBox text="프로젝트 배경" />
-          <p className={textSmall}>{project.background}</p>
-        </CardBox>
+        {project.background && (
+          <CardBox>
+            <CardTitleBox text="프로젝트 배경" />
+            <p className={textSmall}>{project.background}</p>
+          </CardBox>
+        )}
 
         {/* 맡은 역할 */}
         <CardBox>

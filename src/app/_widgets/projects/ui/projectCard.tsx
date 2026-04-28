@@ -29,12 +29,12 @@ export default function ProjectCard() {
     <>
       {project && (
         <div
-          className="w-full lg:h-full h-[100dvh] flex flex-col gap-y-10 flex-1 overflow-y-auto text-black dark:text-amber-100"
+          className="w-full lg:h-full h-[100dvh] flex flex-col gap-y-10 px-2 flex-1 overflow-y-auto text-black dark:text-amber-100 scrollbar-hide"
           ref={scrollRef}
         >
           <div
             key={project.id}
-            className="flex lg:flex-row flex-col items-start justify-start gap-x-4 lg:px-8 px-2 w-full "
+            className="flex lg:flex-row flex-col items-start justify-start  pb-4 gap-x-4 lg:px-8 px-2 w-full "
             id={project.id}
           >
             {/* 프로젝트 기본 정보 사이드바 */}

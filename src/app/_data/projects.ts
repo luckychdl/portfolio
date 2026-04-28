@@ -6,7 +6,7 @@ export const projectsData: ProjectData[] = [
     title: "AI 기반 물류 통합 SaaS 솔루션",
     company: "LOCUSKOREA",
     period: "2024-11 ~ 2025-06",
-    role: "Lead Front-end Developer",
+    role: ["Lead Front-end Developer"],
     description: "AI와 실시간 시스템으로 물류 업무를 재정의한 경험",
     techStack: [
       "React",
@@ -77,7 +77,7 @@ export const projectsData: ProjectData[] = [
     title: "동대문 물류 통합 플랫폼",
     company: "TRENSHOW",
     period: "2024-06 ~ 2024-10",
-    role: "Front-end Developer",
+    role: ["Front-end Developer"],
     description: "동대문 물류의 복잡한 흐름을 통합된 플랫폼으로 단순화하다",
     techStack: [
       "React",
@@ -160,7 +160,7 @@ export const projectsData: ProjectData[] = [
     title: "의류 순환 플랫폼 faav",
     company: "261HOUSE",
     period: "2021-12 ~ 2024-05",
-    role: "Front-end Developer",
+    role: ["Front-end Developer"],
     description:
       "시즌성 의류의 재고 문제를 해결하기 위해 대여, 협찬, 구독, 리세일을 결합한 의류 순환 플랫폼",
     techStack: [
@@ -191,37 +191,100 @@ export const projectsData: ProjectData[] = [
       "운영팀, 디자인팀과의 협업을 통한 서비스 전체 흐름 고려한 UI/UX 설계",
       "AWS 기반 이미지 최적화와 비동기 로직 처리 등 퍼포먼스 중심 커머스 설계",
     ],
-    images: [
-      // {
-      //   id: "faav-1",
-      //   src: "/images/projects/faav-main.png",
-      //   alt: "faav 메인 화면",
-      //   caption: "의류 구독 서비스 메인",
-      // },
-      // {
-      //   id: "faav-2",
-      //   src: "/images/projects/faav-app.png",
-      //   alt: "faav 모바일 앱",
-      //   caption: "모바일 앱 화면",
-      // },
-      // {
-      //   id: "faav-3",
-      //   src: "/images/projects/faav-studio.png",
-      //   alt: "faav studio 인플루언서 화면",
-      //   caption: "인플루언서용 스튜디오",
-      // },
-      // {
-      //   id: "faav-4",
-      //   src: "/images/projects/faav-connect.png",
-      //   alt: "faav connect 관리자 화면",
-      //   caption: "관리자용 시스템",
-      // },
-    ],
+    images: [],
 
     highlights: [
       "의류 순환 생태계 구축",
       "AWS 이미지 최적화",
       "QR/NFC 결제 연동",
+    ],
+  },
+  {
+    id: "SOJUTRIP (외주)",
+    title: "한국 소주 문화를 알리는 호스트와 외국인 여행객 매칭 플랫폼 개발",
+    company: "SOJUTRIP (외주)",
+    period: "2025-10 ~ 2026-01",
+    role: ["Front-end Developer 100% ", "Back-end Developer 20%"],
+    description: "",
+    techStack: [
+      "React",
+      "Next.js",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "React-Query",
+      "Zustand",
+      "i18n",
+    ],
+    background: "",
+    responsibilities: [
+      "SOJUTRIP , SOJUTRIP ADMIN Front-end 전담 개발",
+      "백엔드 API 구현 및 DB 스키마 설계/수정, 서비스 안정화 대응",
+    ],
+    achievements: [
+      "Next.js 15 App Router 기반 프로젝트 구조 설계 및 개발",
+      "예약, 결제, 호스트 등록 등 핵심 사용자 플로우 개발",
+      "i18n 기반 다국어 라우팅 및 자동 번역 시스템 구현",
+      "게스트-호스트 1:1 채팅 및 예약 관리 기능 개발",
+    ],
+    learnings: [
+      "단순 데모가 아닌 실제 서비스 운영을 목표로 한 구조 설계",
+      "기획 → 개발 → 배포 → 운영까지 제품 전 과정 경험",
+      "프론트엔드 개발자로서 서비스 관점의 설계 역량과 백엔드/인프라 이해도를 동시에 강화",
+    ],
+    images: [],
+
+    highlights: [
+      "소주 문화 기반 호스트-여행자 매칭 플랫폼",
+      "실시간 채팅 및 예약 및 결제 서비스 구현",
+      "i18n 기반 다국어 번역 시스템 구현",
+    ],
+  },
+  {
+    id: "아누에듀 AnuEdu (외주)",
+    title: "한국어 발음 학습을 위한 모바일 애플리케이션 개발",
+    company: "아누에듀 AnuEdu (외주)",
+    period: "2026-02 - 2026-03",
+    role: ["Front-end Developer 100% ", "Back-end Developer 20%"],
+    description: "",
+    techStack: [
+      "React",
+      "React-Native",
+      "expo",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "React-Query",
+      "Zustand",
+    ],
+    background:
+      "영상 기반 발음 학습과 Daily Quiz 시스템을 통해 외국인 학습자의 한국어 학습 경험을 개선",
+    responsibilities: [
+      "AnuEdu , AnuEdu ADMIN Front-end 전담 개발",
+      "백엔드 API 구현 및 DB 스키마 설계/수정, 서비스 안정화 대응",
+    ],
+    achievements: [
+      "React Native + Expo 기반 모바일 앱 아키텍처 설계 및 구축",
+      "Google / Apple 소셜 로그인 기반 3단계 온보딩 인증 플로우 개발",
+      "Expo Router 기반 인증 라우팅 및 Route Guard 시스템 구현",
+      "발음 영상 기반 단어 학습 시스템 구현",
+      "Expo AV 기반 Video / Audio 미디어 재생 제어 로직 구현",
+      "단어 북마크 및 학습 콘텐츠 관리 기능 구현",
+      "EAS Update 기반 무심사 OTA 배포로 빠른 기능 개선 대응",
+    ],
+    learnings: [
+      "모바일 환경에서 영상·음성 미디어 리소스와 앱 상태 관리가 복잡하게 얽힌 구조를 경험",
+      "Video / Audio 동시 재생 충돌 문제를 해결하기 위한 미디어 재생 제어 구조 설계",
+      "pending → guest → authed 상태 흐름을 설계하며 인증 상태 관리 구조 이해도 강화",
+      "미디어 처리, 상태 관리, 사용자 흐름 설계가 서비스 안정성과 UX에 큰 영향을 준다는 점을 경험",
+    ],
+    images: [],
+
+    highlights: [
+      "교육 플랫폼 프론트엔드 및 관리자 시스템 개발",
+      "관리자 미디어 업로드 기반 학습 콘텐츠 연동",
+      "발음 청취 및 퀴즈 영상 재생 기능 구현",
+      "EAS Update 기반 무심사 OTA 배포 환경 구축",
     ],
   },
 ];

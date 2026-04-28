@@ -27,7 +27,7 @@ export interface ProjectData {
   title: string;
   company: string;
   period: string;
-  role: string;
+  role: string[];
   description: string;
   techStack: string[];
   background: string;

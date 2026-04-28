@@ -12,6 +12,7 @@ export function RenderMedia({
   isMobile: boolean;
   variant?: "card" | "modal";
 }) {
+  console.log(item);
   if (item.type === "lottie") {
     return (
       <Lottie
@@ -25,9 +26,9 @@ export function RenderMedia({
       <Image
         src={item.src}
         alt=""
-        width={1600}
+        width={item.src.includes("locuskorea") ? 1200 : 600}
         height={1000}
-        className="w-full h-auto object-contain"
+        className=" max-w-full h-auto object-contain"
       />
     );
   }
