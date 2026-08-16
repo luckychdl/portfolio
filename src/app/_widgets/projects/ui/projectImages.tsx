@@ -5,11 +5,15 @@ import { projectImages, ProjectMedia } from "@/app/_data/projectImages";
 import useIsMobile from "@/app/_hooks/useMobile";
 import { RenderMedia } from "@/app/_components/renderMedia";
 import ZoomModal from "@/app/_components/zoomModal";
-import { motion, useInView } from "framer-motion";
-import { LuMaximize2 } from "react-icons/lu";
-import CardTitleBox from "@/app/_components/cardTitleBox";
+import { useInView } from "framer-motion";
+import { VscScreenFull } from "react-icons/vsc";
+import {
+  BlockLine,
+  InlineComment,
+  Line,
+} from "@/app/_components/editorSurface";
 
-export default function ProjectImages({ type }: { type: string }) {
+export default function ProjectImages({ slug }: { slug: string }) {
   const isMobile = useIsMobile();
 
   // 갤러리가 화면에 가까워질 때까지 <img> 자체를 마운트하지 않는다.
@@ -20,63 +24,57 @@ export default function ProjectImages({ type }: { type: string }) {
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const media = (projectImages[type as keyof typeof projectImages] ??
-    []) as readonly ProjectMedia[];
+  const media: readonly ProjectMedia[] = projectImages[slug] ?? [];
   const selectedItem = selectedIndex !== null ? media[selectedIndex] : null;
 
   if (media.length === 0) return null;
 
   return (
     <>
-      <section className="panel p-5 sm:p-6">
-        <div className="mb-4 flex items-end justify-between">
-          <CardTitleBox text="화면 미리보기" />
-          <span className="mb-4 font-mono text-[11px] text-faint">
-            {String(media.length).padStart(2, "0")} SHOTS
-          </span>
-        </div>
-
+      <BlockLine indent={0}>
         <div
           ref={galleryRef}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
+          className="grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3"
         >
           {!galleryInView &&
             media.map((_, index) => (
               <div
                 key={`skeleton_${index}`}
                 aria-hidden
-                className="aspect-[16/10] w-full animate-pulse rounded-2xl border border-line bg-surface-2"
+                className="aspect-[16/10] w-full animate-pulse rounded border border-line bg-surface-2"
               />
             ))}
 
           {galleryInView &&
             media.map((item, index) => (
-              <motion.button
+              <button
                 key={index}
                 type="button"
                 onClick={() => setSelectedIndex(index)}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{
-                  duration: 0.45,
-                  delay: Math.min(index * 0.05, 0.35),
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-surface-2 transition-colors duration-300 hover:border-line-strong"
+                className="group relative aspect-[16/10] w-full overflow-hidden rounded border border-line bg-surface-2 transition-colors duration-300 hover:border-accent"
               >
                 <RenderMedia item={item} isMobile={isMobile} />
 
-                {/* hover overlay */}
-                <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-canvas-deep/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-white uppercase">
-                    <LuMaximize2 /> Zoom
+                <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  <span className="flex items-center gap-1.5 rounded border border-white/25 bg-black/50 px-2 py-1 font-mono text-[10.5px] tracking-wider text-white">
+                    <VscScreenFull /> open preview
                   </span>
                 </span>
-              </motion.button>
+
+                <span className="pointer-events-none absolute top-1.5 left-1.5 rounded bg-black/55 px-1.5 py-0.5 font-mono text-[10px] text-white/80">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </button>
             ))}
         </div>
-      </section>
+      </BlockLine>
+
+      <Line />
+      <Line>
+        <InlineComment>
+          {media.length} screenshots · 클릭하면 원본 크기로 열립니다
+        </InlineComment>
+      </Line>
 
       {selectedItem && (
         <ZoomModal

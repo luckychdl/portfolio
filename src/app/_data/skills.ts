@@ -1,84 +1,66 @@
-interface SkillData {
-  name: string;
-  level: "Beginner" | "Intermediate" | "Advanced" | "Basic";
-  project?: string;
-  icon?: React.ReactElement;
+export interface StackCategory {
+  /** JSON 키로 쓰이는 이름 */
+  key: string;
+  /** 이력서 표기 라벨 */
+  label: string;
+  items: string[];
 }
-export const skillsData: SkillData[] = [
+
+export const stackData: StackCategory[] = [
   {
-    name: "React",
-    level: "Advanced",
-    project: "faav / trenshow / indition",
+    key: "core",
+    label: "Core",
+    items: [
+      "TypeScript",
+      "React",
+      "Next.js (App Router)",
+      "React Native / Expo",
+      "React Query",
+      "Zustand",
+    ],
   },
   {
-    name: "Next.js",
-    level: "Advanced",
-    project: "faav / trenshow / indition",
+    key: "proficient",
+    label: "Proficient",
+    items: [
+      "JavaScript(ES6+)",
+      "Redux · Redux-Saga",
+      "SCSS",
+      "Tailwind CSS",
+      "Styled-Components",
+      "Emotion",
+      "Socket.IO",
+      "Axios / REST API",
+      "NextAuth",
+    ],
   },
   {
-    name: "React-Native",
-    level: "Intermediate",
-    project: "faav app / ddpick app",
+    key: "familiar",
+    label: "Familiar",
+    items: ["Node.js", "Express", "Sequelize", "MySQL", "GraphQL"],
   },
   {
-    name: "React-Query",
-    level: "Intermediate",
-    project: "Indition / Indition-Warehouse",
+    key: "infraAndTools",
+    label: "Infra & Tools",
+    items: [
+      "AWS S3 (Presigned 업로드)",
+      "Amplify",
+      "CloudFront",
+      "GitHub",
+      "Sourcetree",
+      "Figma",
+    ],
   },
   {
-    name: "Redux-Saga",
-    level: "Intermediate",
-    project: "faav app / faav",
-  },
-  {
-    name: "Zustand",
-    level: "Intermediate",
-    project: "Indition / Indition-Warehouse",
-  },
-  {
-    name: "WebSocket",
-    level: "Intermediate",
-    project: "실시간 채팅서비스",
-  },
-  {
-    name: "AWS",
-    level: "Intermediate",
-    project: "faav studio 이미지 최적화 맟 배포",
-  },
-  {
-    name: "OpenAI API",
-    level: "Beginner",
-    project: "LLM 기반 응답 스트리밍",
-  },
-  {
-    name: "QR / NFC 연동",
-    level: "Beginner",
-    project: "faav 오프라인 팝업 결제 서비스",
-  },
-  {
-    name: "Express.js",
-    level: "Beginner",
-    project: "indition / indition-warehouse 백엔드 구현",
-  },
-  {
-    name: "Node.js",
-    level: "Beginner",
-    project: "indition / indition-warehouse 백엔드 구현",
-  },
-  {
-    name: "CSS/SCSS",
-    level: "Advanced",
-  },
-  {
-    name: "Emotion",
-    level: "Intermediate",
-  },
-  {
-    name: "Styled Components",
-    level: "Intermediate",
-  },
-  {
-    name: "Tailwind CSS",
-    level: "Beginner",
+    key: "domain",
+    label: "Domain",
+    items: [
+      "결제 연동(PG · 간편결제 · 해외 결제)",
+      "물류 WMS(바코드 · 재고 · 정산)",
+      "다국어 i18n · 자동 번역",
+      "어드민 · 백오피스 UX 개선",
+      "하이브리드 앱 WebView 브릿지",
+      "LLM 채팅 UI 연동",
+    ],
   },
 ];
