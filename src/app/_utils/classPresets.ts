@@ -1,4 +1,4 @@
-export const textSmallMargin = "text-sm text-gray-800 dark:text-amber-100 mb-3";
-export const textSmall = "text-sm text-gray-800 dark:text-amber-100";
+export const textSmallMargin = "text-sm leading-relaxed text-muted mb-2.5";
+export const textSmall = "text-sm leading-relaxed text-muted";
 export const textBaseBold =
-  "text-xl font-bold text-gray-800 dark:text-amber-100 mb-3";
+  "text-base font-semibold leading-relaxed text-fg mb-3";

@@ -1,64 +1,63 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { projectImages } from "@/app/_data/projectImages";
+import { projectImages, ProjectMedia } from "@/app/_data/projectImages";
 import useIsMobile from "@/app/_hooks/useMobile";
 import { RenderMedia } from "@/app/_components/renderMedia";
 import ZoomModal from "@/app/_components/zoomModal";
 import { motion } from "framer-motion";
-export default function ProjectImages() {
-  const searchParams = useSearchParams();
-  const type = searchParams.get("type") as keyof typeof projectImages;
+import { LuMaximize2 } from "react-icons/lu";
+import CardTitleBox from "@/app/_components/cardTitleBox";
+
+export default function ProjectImages({ type }: { type: string }) {
   const isMobile = useIsMobile();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const media = projectImages[type] ?? [];
-  const first = media[0];
-  const restCount = media.length - 1;
+  const media = (projectImages[type as keyof typeof projectImages] ??
+    []) as readonly ProjectMedia[];
   const selectedItem = selectedIndex !== null ? media[selectedIndex] : null;
+
+  if (media.length === 0) return null;
 
   return (
     <>
-      <div className="space-y-4">
-        {!isOpen && first && (
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="relative w-full aspect-[16/9] overflow-hidden rounded-xl shadow-md"
-          >
-            <RenderMedia item={first} isMobile={isMobile} />
+      <section className="panel p-5 sm:p-6">
+        <div className="mb-4 flex items-end justify-between">
+          <CardTitleBox text="화면 미리보기" />
+          <span className="mb-4 font-mono text-[11px] text-faint">
+            {String(media.length).padStart(2, "0")} SHOTS
+          </span>
+        </div>
 
-            {restCount > 0 && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white text-2xl font-bold">
-                +{restCount}
-              </div>
-            )}
-          </button>
-        )}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {media.map((item, index) => (
+            <motion.button
+              key={index}
+              type="button"
+              onClick={() => setSelectedIndex(index)}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.45,
+                delay: Math.min(index * 0.05, 0.35),
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-surface-2 transition-colors duration-300 hover:border-line-strong"
+            >
+              <RenderMedia item={item} isMobile={isMobile} />
 
-        {isOpen && (
-          <motion.div
-            className="grid gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            {media.map((item, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setSelectedIndex(index)}
-                className="relative w-full aspect-[16/9] overflow-hidden rounded-xl shadow-md"
-              >
-                <RenderMedia item={item} isMobile={isMobile} />
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </div>
+              {/* hover overlay */}
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-canvas-deep/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+                <span className="flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-white uppercase">
+                  <LuMaximize2 /> Zoom
+                </span>
+              </span>
+            </motion.button>
+          ))}
+        </div>
+      </section>
 
       {selectedItem && (
         <ZoomModal

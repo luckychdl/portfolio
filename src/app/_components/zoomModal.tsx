@@ -1,65 +1,75 @@
 "use client";
 
-import { RenderMedia } from "./renderMedia";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import { LuX } from "react-icons/lu";
+import { RenderMedia } from "./renderMedia";
+import { ProjectMedia } from "../_data/projectImages";
+
 export default function ZoomModal({
   item,
   isMobile,
   onClose,
 }: {
-  item: any;
+  item: ProjectMedia;
   isMobile: boolean;
   onClose: () => void;
 }) {
-  // const [scale, setScale] = useState(1);
+  const [mounted, setMounted] = useState(false);
 
-  // const BASE_WIDTH = 720;
-  // const MIN_SCALE = 1;
-  // const MAX_SCALE = 4;
-  // const ZOOM_SPEED = 0.0005;
+  useEffect(() => {
+    setMounted(true);
 
-  // const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
 
-  //   setScale((prev) => {
-  //     const next = prev - e.deltaY * ZOOM_SPEED;
-  //     return Math.min(Math.max(next, MIN_SCALE), MAX_SCALE);
-  //   });
-  // };
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  // Portal to <body>: the page-transition wrapper creates a stacking context,
+  // so an in-place overlay would render underneath the fixed header.
+  return createPortal(
     <motion.div
-      className="fixed inset-0 z-50 bg-black/80 overflow-auto p-y-4"
+      role="dialog"
+      aria-modal
+      className="fixed inset-0 z-[60] overflow-auto bg-canvas-deep/85 backdrop-blur-md"
       onClick={onClose}
-      initial={{ opacity: 0, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
     >
       <button
         type="button"
-        className="fixed right-5 top-5 z-20 text-white text-3xl"
+        aria-label="닫기"
+        className="glass fixed top-5 right-5 z-20 grid h-11 w-11 place-items-center rounded-full text-fg transition-colors duration-300 hover:border-line-strong"
         onClick={onClose}
       >
-        ×
+        <LuX className="text-lg" />
       </button>
 
       <motion.div
-        className="min-h-full flex items-center justify-center p-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex min-h-full items-center justify-center p-5 sm:p-10"
+        initial={{ opacity: 0, scale: 0.97, y: 12 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="flex justify-center"
-          // style={{
-          //   width: `${BASE_WIDTH * scale}px`,
-          //   maxWidth: scale === 1 ? "90vw" : "none",
-          // }}
+          className="flex w-full justify-center"
         >
           <RenderMedia item={item} isMobile={isMobile} variant="modal" />
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }

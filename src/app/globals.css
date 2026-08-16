@@ -1,117 +1,363 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ------------------------------------------------------------------
+   Design tokens
+------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  /* next/font faces are injected on <html>; compose the reading stack here */
+  --font-body: var(--font-inter), var(--font-noto-kr), ui-sans-serif, system-ui,
+    sans-serif;
+
+  --canvas: #f6f5f2;
+  --canvas-deep: #ecebe6;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-solid: #ffffff;
+  --surface-2: rgba(20, 18, 15, 0.04);
+  --line: rgba(20, 18, 15, 0.1);
+  --line-strong: rgba(20, 18, 15, 0.2);
+
+  --fg: #16150f;
+  --muted: #56534b;
+  --faint: #8b867c;
+
+  --accent: #a9660b;
+  --accent-soft: #e39a2a;
+  --accent-2: #4f46e5;
+  --accent-glow: rgba(227, 154, 42, 0.2);
+  --accent-2-glow: rgba(79, 70, 229, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(20, 18, 15, 0.06);
+  --shadow-md: 0 8px 24px -12px rgba(20, 18, 15, 0.24);
+  --shadow-lg: 0 24px 60px -28px rgba(20, 18, 15, 0.4);
+
+  --grid-line: rgba(20, 18, 15, 0.055);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --canvas: #08080a;
+  --canvas-deep: #050506;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-solid: #101014;
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+
+  --fg: #f3efe6;
+  --muted: #a29c91;
+  --faint: #726d64;
+
+  --accent: #edb04a;
+  --accent-soft: #f7cd82;
+  --accent-2: #8b8cf7;
+  --accent-glow: rgba(237, 176, 74, 0.28);
+  --accent-2-glow: rgba(139, 140, 247, 0.24);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 30px -12px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 80px -30px rgba(0, 0, 0, 0.85);
+
+  --grid-line: rgba(255, 255, 255, 0.045);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-surface: var(--surface);
+  --color-surface-solid: var(--surface-solid);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display-face), var(--font-body);
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, monospace;
+
+  --animate-aurora: aurora 22s ease-in-out infinite;
+  --animate-aurora-slow: aurora 34s ease-in-out infinite reverse;
+  --animate-blink: blink 1.05s steps(2, start) infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-marquee: marquee 32s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
+/* ------------------------------------------------------------------
+   Keyframes
+------------------------------------------------------------------ */
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6%, -8%, 0) scale(1.15);
+  }
+  66% {
+    transform: translate3d(-7%, 5%, 0) scale(0.92);
   }
 }
 
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------ */
 @layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--canvas);
+  }
+
   button {
     cursor: pointer;
-    margin: 0;
-    box-sizing: border-box;
     outline: none;
-
-    &:hover {
-      transform: scale(1.2);
-      transition: transform 300ms ease;
-    }
   }
 
-  button.no-style {
-    cursor: pointer;
-    margin: 0;
-    box-sizing: border-box;
-    outline: none;
-
-    &:hover {
-      transform: scale(1) !important;
-      transition: transform 300ms ease;
-    }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
+/* ------------------------------------------------------------------
+   Scrollbar
+------------------------------------------------------------------ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
-  /* 스크롤 트랙을 투명하게 설정 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  /* 밝은 스크롤 색상 (다크모드용) */
-  border-radius: 4px;
+  background-color: var(--line-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
 }
 
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--faint);
+  background-clip: content-box;
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+------------------------------------------------------------------ */
 @layer utilities {
-  .underline-hover {
-    position: relative;
-  }
-
-  .underline-current {
-    position: relative;
-  }
-
-  .underline-hover::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0%;
-    background-color: currentColor;
-    transition: width 0.3s ease-in-out;
-  }
-
-  .underline-current::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background-color: currentColor;
-  }
-
-  .underline-hover:hover::after {
-    width: 100%;
-  }
-
-  .underline-current:hover::after {
-    width: 100%;
-  }
-
   .scrollbar-hide {
-
     -ms-overflow-style: none;
-
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
-
       display: none;
-
     }
-
   }
 
+  /* Frosted panel */
+  .glass {
+    background-color: var(--surface);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--line);
+  }
+
+  /* Content card with a soft top highlight */
+  .panel {
+    position: relative;
+    background-color: var(--surface);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition:
+      border-color 0.35s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease;
+  }
+
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.28),
+      transparent 42%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .panel-hover:hover {
+    transform: translateY(-3px);
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .gradient-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--fg) 0%,
+      var(--accent-soft) 45%,
+      var(--accent-2) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .accent-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--accent-soft),
+      var(--accent-2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Blueprint grid backdrop */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 25%, transparent 78%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 90% 70% at 50% 0%,
+      #000 25%,
+      transparent 78%
+    );
+  }
+
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* Animated underline for links */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1.5px;
+    width: 0%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-soft), var(--accent-2));
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover::after,
+  .link-underline-active::after {
+    width: 100%;
+  }
+
+  /* Marquee-ish shimmer sweep used on the hero rule */
+  .shimmer-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent-soft),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

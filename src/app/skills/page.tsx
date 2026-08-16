@@ -1,15 +1,18 @@
-import TransitionWrapper from "../_components/transitionWrapper";
+import SectionHeading from "../_components/sectionHeading";
 import BadgeContainer from "../_widgets/skills/ui/badgeContainer";
-
-import SkillsHeader from "../_widgets/skills/ui/header";
+import SkillsLegend from "../_widgets/skills/ui/header";
 
 export default function Skills() {
   return (
-    <TransitionWrapper>
-      <div className="flex-1 flex flex-col items-center w-full lg:h-[calc(100dvh-60px-76px)] h-[calc(100dvh-60px-68px)] pt-8 overflow-y-auto relative scrollbar-hide">
-        <SkillsHeader />
-        <BadgeContainer />
-      </div>
-    </TransitionWrapper>
+    <div className="mx-auto w-full max-w-6xl">
+      <SectionHeading
+        eyebrow="Skills"
+        title="기술 스택"
+        description="숙련도와 함께, 각 기술을 실제로 사용한 프로젝트를 함께 표기했습니다."
+        index="02"
+      />
+      <SkillsLegend />
+      <BadgeContainer />
+    </div>
   );
 }

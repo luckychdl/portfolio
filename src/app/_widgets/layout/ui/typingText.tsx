@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 type MultiTypingTextProps = {
   lines: string[];
+  /** per-line styling; falls back to `className` when missing */
+  lineClassNames?: string[];
   className?: string;
   speed?: number;
   lineDelay?: number; // 다음 줄 시작 전 대기 시간
@@ -11,6 +13,7 @@ type MultiTypingTextProps = {
 
 export default function MultiTypingText({
   lines,
+  lineClassNames,
   className = "",
   speed = 100,
   lineDelay = 500,
@@ -45,13 +48,28 @@ export default function MultiTypingText({
     }
   }, [charIndex, currentLine, lines, speed, lineDelay]);
 
+  const done = currentLine >= lines.length;
+
   return (
-    <div className="flex flex-col items-center gap-4">
-      {displayedLines.map((line, i) => (
-        <span key={i} className={className}>
-          {line}
-        </span>
-      ))}
+    <div className="flex flex-col items-center gap-3 sm:gap-4">
+      {lines.map((_, i) => {
+        const typed = displayedLines[i] ?? "";
+        const isCursorHere = done ? i === lines.length - 1 : i === currentLine;
+
+        return (
+          <span
+            key={i}
+            className={`${lineClassNames?.[i] ?? className} ${
+              typed.length === 0 && i > currentLine ? "hidden" : "block"
+            }`}
+          >
+            {typed}
+            {isCursorHere && (
+              <span className="animate-blink ml-1 inline-block h-[0.85em] w-[0.5ch] translate-y-[0.06em] bg-accent align-middle" />
+            )}
+          </span>
+        );
+      })}
     </div>
   );
 }

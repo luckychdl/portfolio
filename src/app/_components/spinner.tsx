@@ -1,7 +1,10 @@
 export function Spinner() {
   return (
-    <div className="flex justify-center py-10">
-      <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-black" />
+    <div className="flex items-center justify-center py-16">
+      <span className="relative flex h-12 w-12">
+        <span className="absolute inset-0 rounded-full border-2 border-line" />
+        <span className="animate-spin absolute inset-0 rounded-full border-2 border-transparent border-t-accent" />
+      </span>
     </div>
   );
 }

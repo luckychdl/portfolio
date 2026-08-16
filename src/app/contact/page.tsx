@@ -1,41 +1,16 @@
-import Link from "next/link";
+import SectionHeading from "../_components/sectionHeading";
+import ContactList from "../_widgets/contact/ui/contactList";
 
 export default function Contact() {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full h-full pt-8 gap-y-8">
-      <div className="flex flex-row items-center gap-x-2">
-        <h2 className="text-4xl  text-black dark:text-amber-100">📫 CONTACT</h2>
-      </div>
-      <div className="space-y-2 text-lg w-full flex flex-col items-center justify-center">
-        <div className="flex items-center flex-row gap-1">
-          <p className="text-black dark:text-amber-100">📧 Email : </p>
-          <Link
-            href="mailto:vivid4112@gmail.com"
-            className="underline text-black dark:text-amber-100"
-          >
-            vivid4112@gmail.com
-          </Link>
-        </div>
-        <div className="flex items-center flex-row gap-1">
-          <p className="text-black dark:text-amber-100">📞 Phone : </p>
-          <Link
-            href="tel:01041122653"
-            className="underline text-black dark:text-amber-100"
-          >
-            010-4112-2653
-          </Link>
-        </div>
-        <div className="flex items-center flex-row gap-1">
-          <p className="text-black dark:text-amber-100">💼 GitHub : </p>
-          <Link
-            target="_blank"
-            href="https://github.com/luckychdl"
-            className="underline text-black dark:text-amber-100"
-          >
-            github.com/luckychdl
-          </Link>
-        </div>
-      </div>
+    <div className="mx-auto flex w-full max-w-4xl flex-col justify-center lg:min-h-[calc(100dvh-14rem)]">
+      <SectionHeading
+        eyebrow="Contact"
+        title="함께 만들어요"
+        description="제안이나 궁금한 점이 있다면 편하게 연락 주세요."
+        index="04"
+      />
+      <ContactList />
     </div>
   );
 }

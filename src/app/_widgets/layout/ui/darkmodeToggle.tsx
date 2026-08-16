@@ -1,34 +1,41 @@
 "use client";
 
 import { useTheme } from "@/app/_components/themeProvider";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
-  const [isHover, setIsHover] = useState<boolean>(false);
+  const { theme, mounted, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
-    <label
-      className="relative inline-block w-14 h-6 cursor-pointer "
-      onMouseOver={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+      className="glass group relative h-9 w-[68px] rounded-full p-1 transition-colors duration-300 hover:border-line-strong"
     >
-      {/* 숨겨진 체크박스 */}
-      <input
-        type="checkbox"
-        checked={theme === "dark"}
-        onChange={toggleTheme}
-        className="sr-only peer"
-      />
+      {/* track icons */}
+      <span className="pointer-events-none absolute inset-0 flex items-center justify-between px-2.5 text-[13px]">
+        <LuSun
+          className={`transition-colors duration-300 ${
+            isDark ? "text-faint" : "text-accent"
+          }`}
+        />
+        <LuMoon
+          className={`transition-colors duration-300 ${
+            isDark ? "text-accent" : "text-faint"
+          }`}
+        />
+      </span>
 
-      {/* 토글 배경 */}
-      <div className="w-full h-full bg-gray-300 dark:bg-gray-700 rounded-full transition-colors duration-300 peer-checked:bg-gray-700 dark:peer-checked:bg-amber-100" />
-
-      {/* 토글 버튼 */}
-      <div
-        className={`absolute top-0.5 left-1 w-5 h-5 bg-white dark:bg-black rounded-full shadow-md ${
-          isHover ? "scale-120" : "no-style"
-        } transition-transform duration-300 peer-checked:translate-x-7`}
+      {/* knob */}
+      <motion.span
+        aria-hidden
+        className="relative block h-7 w-7 rounded-full bg-gradient-to-br from-accent-soft to-accent shadow-[0_2px_12px_var(--accent-glow)]"
+        animate={{ x: mounted && isDark ? 32 : 0 }}
+        transition={{ type: "spring", stiffness: 420, damping: 32 }}
       />
-    </label>
+    </button>
   );
 }

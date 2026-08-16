@@ -1,6 +1,14 @@
-export default function CardBox({ children }: { children: React.ReactNode }) {
+import { twMerge } from "tailwind-merge";
+
+export default function CardBox({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="flex flex-col border w-full border-gray-300 p-4 rounded-2xl shadow-md">
+    <div className={twMerge("panel flex flex-col p-5 sm:p-6", className)}>
       {children}
     </div>
   );
