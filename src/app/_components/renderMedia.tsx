@@ -1,10 +1,8 @@
 "use client";
 import { ProjectMedia } from "../_data/projectImages";
-import Lottie from "lottie-react";
-import animationData from "../../../public/main_video.json";
-import animationDataMobile from "../../../public/main_mobile.json";
 import Image from "next/image";
 import { useState } from "react";
+import LottieMedia from "./lottieMedia";
 
 export function RenderMedia({
   item,
@@ -18,14 +16,7 @@ export function RenderMedia({
   const [loading, setLoading] = useState(true);
 
   if (item.type === "lottie") {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Lottie
-          animationData={isMobile ? animationDataMobile : animationData}
-          loop
-        />
-      </div>
-    );
+    return <LottieMedia isMobile={isMobile} />;
   }
 
   if (variant === "modal") {
@@ -39,6 +30,7 @@ export function RenderMedia({
           alt=""
           width={item.src.includes("locuskorea") ? 1600 : 900}
           height={1200}
+          sizes="(max-width: 768px) 100vw, 90vw"
           className={`h-auto max-w-full rounded-xl object-contain shadow-[var(--shadow-lg)] transition-opacity duration-500 ${
             loading ? "opacity-0" : "opacity-100"
           }`}
@@ -57,8 +49,10 @@ export function RenderMedia({
         src={item.src}
         alt=""
         fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className={`object-contain transition-all duration-700 ${
+        loading="lazy"
+        quality={70}
+        sizes="(max-width: 640px) 92vw, (max-width: 1280px) 45vw, 30vw"
+        className={`object-cover object-top transition-all duration-700 ${
           loading ? "scale-105 opacity-0" : "scale-100 opacity-100"
         }`}
         onLoad={() => setLoading(false)}

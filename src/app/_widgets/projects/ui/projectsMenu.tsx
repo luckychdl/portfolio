@@ -21,7 +21,11 @@ export default function ProjectsMenu({ activeType }: { activeType: string }) {
             href={`/projects?type=${encodeURIComponent(project.id)}`}
             key={`${project.id}_${idx}`}
             scroll={false}
-            onClick={() => setSelected(project.id)}
+            onClick={() => {
+              setSelected(project.id);
+              // 서버 응답을 기다리지 않고 즉시 상단으로 올린다
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className={`group relative flex min-w-fit shrink-0 items-center gap-3 rounded-xl px-4 py-3 transition-colors duration-300 lg:w-full ${
               isActive ? "text-fg" : "text-faint hover:text-muted"
             }`}
