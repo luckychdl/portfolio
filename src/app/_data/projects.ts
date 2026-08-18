@@ -248,7 +248,7 @@ export const projectsData: ProjectData[] = [
         text: "**React Native WebView 하이브리드 앱 개발** — intent 스킴 폴백 처리로 안드로이드 카드사 앱 호출 실패 문제 해결, History API 후킹으로 웹뷰 내 SPA 라우팅을 네이티브에 동기화해 하드웨어 백버튼 동작 정상화",
       },
       {
-        text: "커머스 SEO 대응을 위해 63개 페이지 SSR 적용, 카카오 · 네이버 소셜 로그인 연동",
+        text: "커머스 SEO 대응을 위해 페이지 SSR 적용, 카카오 · 네이버 소셜 로그인 연동",
       },
       {
         text: "주문 데이터 26개 컬럼 엑셀 양방향 연동 및 운송장 · 인보이스 자동 출력으로 운영팀 수작업 제거",
