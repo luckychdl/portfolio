@@ -117,6 +117,70 @@ src/app
 - **스크린샷 갤러리는 IntersectionObserver 로 게이팅** — `loading="lazy"` 만으로는 브라우저 기본 임계값(~1250px)이 넓어 첫 진입에 전부 요청됩니다.
 - **이미지 확대 모달은 `document.body` 로 포털** — 조상 요소의 `transform`/`filter` 가 스태킹 컨텍스트를 만들어 `position: fixed` 오버레이가 헤더 아래로 깔립니다.
 
+## 방문자 통계 (`/admin`)
+
+방문 기록은 Supabase 에 쌓이고, 비밀번호로 잠긴 `/admin` 에서 확인합니다.
+이 라우트는 탐색기 · 탭 · 커맨드 팔레트 어디에도 노출되지 않고 `noindex` 이며, IDE 셸도 씌우지 않습니다.
+
+### 설정
+
+1. [supabase.com](https://supabase.com) 에서 프로젝트를 만듭니다.
+2. SQL Editor 에 [`supabase/schema.sql`](supabase/schema.sql) 을 붙여넣고 실행합니다.
+   `page_views` 테이블 · 인덱스 · RLS · 순 방문자 집계 함수가 한 번에 만들어집니다.
+3. `.env.example` 을 `.env.local` 로 복사하고 세 값을 채웁니다.
+
+   | 변수                        | 값                                                        |
+   | --------------------------- | --------------------------------------------------------- |
+   | `SUPABASE_URL`              | Project Settings → Data API → Project URL                 |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Project Settings → API Keys → `service_role` (secret)     |
+   | `ADMIN_PASSWORD`            | `/admin` 접속 비밀번호 (직접 정함)                        |
+
+4. 배포 환경(Vercel 등)에도 같은 환경변수 세 개를 등록합니다.
+
+> `service_role` 키는 RLS 를 우회합니다. 서버 라우트에서만 읽히고 번들에 들어가지 않도록
+> `NEXT_PUBLIC_` 접두사를 붙이지 마세요.
+
+### 동작
+
+| 조각                          | 역할                                                                   |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| `_components/visitTracker`    | 라우트가 바뀔 때 `/api/visit` 로 조회를 1건 보냄                       |
+| `api/visit`                   | 봇 UA · `/admin` · 비정상 경로를 걸러내고 `page_views` 에 insert       |
+| `api/admin/login`             | 비밀번호 확인 후 HMAC 서명 쿠키(7일) 발급 / 삭제                       |
+| `_lib/visitStats`             | 최근 30일 기록을 KST 하루 경계로 집계                                   |
+| `admin/`                      | 잠금 화면 + `stats.json` 형태의 통계 화면                              |
+
+방문자는 브라우저 `localStorage` 에 한 번 발급되는 `pf_visitor_id` 로 구분합니다.
+쿠키를 심지 않고 IP 도 저장하지 않으므로 별도 동의 배너가 필요 없습니다.
+
+화면에는 누적 페이지뷰 · 누적 순 방문자, 오늘 / 최근 7일 / 최근 30일,
+최근 14일 막대그래프, 페이지별 · 유입 경로별 순위, 기기 비율, 최근 방문 12건이 나옵니다.
+유입 경로는 호스트 단위로 묶고 사이트 내부 이동은 제외합니다.
+
+### 배포 (AWS Amplify)
+
+Supabase 는 관리형이라 따로 배포할 것이 없습니다. 스키마만 올려두면 됩니다.
+Amplify 는 방문자 통계가 붙으면서 정적 배포에서 **SSR 배포로 바뀌므로** 세 가지를 확인해야 합니다.
+
+1. **플랫폼이 `WEB_COMPUTE` 인지** — 정적(`WEB`)으로 만들어진 앱이면 CLI 로 한 번 바꿔야 합니다.
+   ```bash
+   aws amplify get-app --app-id <APP_ID> --query 'app.platform'
+   aws amplify update-app --app-id <APP_ID> --platform WEB_COMPUTE --region <REGION>
+   ```
+   그리고 App settings → General 에서 **서비스 역할(Service role)** 을 지정합니다.
+
+2. **환경변수를 `.env.production` 으로 옮기는지** — Amplify 콘솔에 등록한 환경변수는
+   SSR 런타임에 그대로 전달되지 않습니다. 저장소의 [`amplify.yml`](amplify.yml) 이 빌드 중에
+   `.env.production` 으로 복사하도록 해두었습니다. 콘솔에는 값만 등록하면 됩니다.
+
+3. **환경변수를 바꾸면 재배포** — 서버가 빌드 산출물의 `.env.production` 을 읽으므로
+   콘솔에서 값만 고치고 재배포하지 않으면 반영되지 않습니다.
+
+> AWS 는 배포 산출물을 읽을 수 있는 사람이 환경변수를 볼 수 있다고 안내합니다.
+> `SUPABASE_SERVICE_ROLE_KEY` 가 노출되면 통계 테이블을 임의로 읽고 쓸 수 있으니,
+> AWS 계정 접근 권한을 본인만 갖고 있는지 확인하세요.
+> 더 엄격히 가려면 SSR 컴퓨트 IAM 역할 + Secrets Manager 로 옮기면 됩니다.
+
 ## 연락처
 
 - Email — vivid4112@gmail.com

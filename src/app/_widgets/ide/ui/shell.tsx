@@ -39,6 +39,11 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     setDrawerOpen(false);
   }, [pathname]);
 
+  // 관리자 화면은 탐색기/탭에 노출되지 않는 별도 화면이라 IDE 크롬을 씌우지 않는다
+  if (pathname.startsWith("/admin")) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="flex h-[100dvh] flex-col overflow-hidden bg-editor">
       <TitleBar

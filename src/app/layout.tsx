@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_KR, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "./_components/themeProvider";
 import Shell from "./_widgets/ide/ui/shell";
+import VisitTracker from "./_components/visitTracker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
       </head>
       <ThemeProvider>
         <body className="antialiased">
+          <VisitTracker />
           <Shell>{children}</Shell>
         </body>
       </ThemeProvider>
