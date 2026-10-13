@@ -35,6 +35,16 @@ export const stackData: StackCategory[] = [
     ],
   },
   {
+    key: "testAndAi",
+    label: "Test · AI",
+    items: [
+      "Vitest",
+      "Playwright",
+      "Claude API (스트리밍 · 구조화 출력)",
+      "Claude Code",
+    ],
+  },
+  {
     key: "familiar",
     label: "Familiar",
     items: ["Node.js", "Express", "Sequelize", "MySQL", "GraphQL"],

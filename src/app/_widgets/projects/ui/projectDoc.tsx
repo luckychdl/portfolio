@@ -5,6 +5,7 @@ import {
   Line,
   RichText,
 } from "@/app/_components/editorSurface";
+import { projectImages } from "@/app/_data/projectImages";
 import ProjectImages from "./projectImages";
 
 /** `## heading` */
@@ -72,6 +73,8 @@ function Bullet({
 }
 
 export default function ProjectDoc({ project }: { project: ProjectData }) {
+  const hasPreview = (projectImages[project.slug]?.length ?? 0) > 0;
+
   return (
     <CodeSurface className="max-w-5xl pb-16">
       {/* ── YAML front matter ───────────────────────────── */}
@@ -94,6 +97,19 @@ export default function ProjectDoc({ project }: { project: ProjectData }) {
         <Line>
           <span className="tok-prop inline-block w-[10ch]">status:</span>
           <span className="tok-str">{project.note}</span>
+        </Line>
+      )}
+      {project.repo && (
+        <Line>
+          <span className="tok-prop inline-block w-[10ch]">repo:</span>
+          <a
+            href={`https://${project.repo}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-syn-fn underline decoration-syn-fn/30 underline-offset-4 transition-colors hover:decoration-syn-fn"
+          >
+            {project.repo}
+          </a>
         </Line>
       )}
       {project.tags.length > 0 && (
@@ -159,6 +175,30 @@ export default function ProjectDoc({ project }: { project: ProjectData }) {
         </span>
       </BlockLine>
 
+      {/* ── Metrics ─────────────────────────────────────── */}
+      {project.metrics && project.metrics.length > 0 && (
+        <>
+          <Line />
+          <BlockLine indent={0}>
+            <div className="grid max-w-3xl grid-cols-2 gap-2 lg:grid-cols-4">
+              {project.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="rounded border border-line bg-surface-2 px-3 py-2.5"
+                >
+                  <div className="font-mono text-[17px] font-bold text-accent">
+                    {metric.value}
+                  </div>
+                  <div className="mt-1 font-sans text-[11.5px] leading-[1.5] text-muted">
+                    {metric.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </BlockLine>
+        </>
+      )}
+
       {/* ── Background ──────────────────────────────────── */}
       {project.background && (
         <>
@@ -179,6 +219,42 @@ export default function ProjectDoc({ project }: { project: ProjectData }) {
         </>
       )}
 
+      {/* ── Architecture ────────────────────────────────── */}
+      {project.architecture && (
+        <>
+          <Line />
+          <Heading>아키텍처</Heading>
+          <Line />
+          <BlockLine indent={0}>
+            <div className="flex max-w-3xl flex-col gap-1.5 md:flex-row md:items-stretch">
+              {project.architecture.flow.map((layer, index) => (
+                <div
+                  key={layer.name}
+                  className="flex flex-col gap-1.5 md:flex-1 md:flex-row md:items-stretch"
+                >
+                  {index > 0 && (
+                    <span className="tok-punc self-center font-mono text-[12px] max-md:rotate-90">
+                      →
+                    </span>
+                  )}
+                  <div className="flex-1 rounded border border-line bg-surface-2 px-2.5 py-2 text-center">
+                    <div className="font-mono text-[11.5px] font-semibold break-all text-fg">
+                      {layer.name}
+                    </div>
+                    <div className="mt-0.5 font-sans text-[11px] leading-[1.5] text-muted">
+                      {layer.detail}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </BlockLine>
+          {project.architecture.note && (
+            <Prose>{project.architecture.note}</Prose>
+          )}
+        </>
+      )}
+
       {/* ── Achievements ────────────────────────────────── */}
       {project.achievements.length > 0 && (
         <>
@@ -196,6 +272,20 @@ export default function ProjectDoc({ project }: { project: ProjectData }) {
                 </Bullet>
               ))}
             </div>
+          ))}
+        </>
+      )}
+
+      {/* ── Testing & workflow ──────────────────────────── */}
+      {project.testing && project.testing.length > 0 && (
+        <>
+          <Line />
+          <Heading>테스트 · 개발 방식</Heading>
+          <Line />
+          {project.testing.map((item, index) => (
+            <Bullet key={index} marker="→" strong>
+              {item.text}
+            </Bullet>
           ))}
         </>
       )}
@@ -235,10 +325,14 @@ export default function ProjectDoc({ project }: { project: ProjectData }) {
       )}
 
       {/* ── Preview ─────────────────────────────────────── */}
-      <Line />
-      <Heading>화면 미리보기</Heading>
-      <Line />
-      <ProjectImages slug={project.slug} />
+      {hasPreview && (
+        <>
+          <Line />
+          <Heading>화면 미리보기</Heading>
+          <Line />
+          <ProjectImages slug={project.slug} />
+        </>
+      )}
     </CodeSurface>
   );
 }
